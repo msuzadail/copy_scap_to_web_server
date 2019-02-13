@@ -1,0 +1,19 @@
+---
+
+- name: determine the most recent scap report
+  command: ls -tr /files
+  register: results
+
+- name: create the scap directory in the web server content
+  file:
+    name: /var/www/html/oscap
+    state: directory
+    mode: 0755
+
+- name: copy SCAP reports to the web server content directory
+  copy:
+    src: files/{{ item }}
+    dest: /var/www/html/oscap
+    mode: 0644
+  with_items: "{{ results.stdout_lines }}"
+  when: item | match("scan-xccdf-report-*")
