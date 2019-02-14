@@ -3,9 +3,7 @@
   remote_user: root
   tasks:
   - name: copy SCAP reports to the web server content directory
-    copy:
-      src: "{{ item }}"
-      dest: /var/www/html/oscap
-      mode: 0644
-    with_fileglob:
-      - /var/lib/awx/projects/_15__run_openscap_scan/files/*
+    synchronize:
+      src: /var/lib/awx/projects/_15__run_openscap_scan/files/
+      dest: rsync:repo.hatrick.lab/var/www/html/oscap
+    delegate_to: delagate.host
