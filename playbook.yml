@@ -5,5 +5,4 @@
   - name: copy SCAP reports to the web server content directory
     synchronize:
       src: /var/lib/awx/projects/_15__run_openscap_scan/files/
-      dest: rsync://repo.hattrick.lab:/var/www/html/oscap
-    delegate_to: 127.0.0.1
+      dest: repo.hattrick.lab:/var/www/html/oscap
