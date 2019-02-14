@@ -4,7 +4,7 @@
   tasks:
   - name: copy SCAP reports to the web server content directory
     copy:
-      src: /var/lib/awx/projects/_15__run_openscap_scan/files/{{ item }}
+      src: "{{ item }}"
       dest: /var/www/html/oscap
       mode: 0644
     with_fileglob:
