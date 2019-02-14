@@ -1,9 +1,11 @@
 ---
-
-- name: copy SCAP reports to the web server content directory
-  copy:
-    src: files/{{ item }}
-    dest: /var/www/html/oscap
-    mode: 0644
-  with_fileglob:
-    - files/*
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: copy SCAP reports to the web server content directory
+    copy:
+      src: files/{{ item }}
+      dest: /var/www/html/oscap
+      mode: 0644
+    with_fileglob:
+      - files/*
